@@ -86,15 +86,15 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
         </div>
       </div>
 
-      {/* Delete confirmation modal */}
+    
       <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
-        <DialogContent>
+        <DialogContent className="lg:w-[50%] lg:max-w-none md:p-10 border-[#999999]" showCloseButton={false}>
           <DialogHeader>
             <DialogTitle className="font-sans font-bold text-[22px] leading-none tracking-normal text-black">
               Are you sure you want to delete this item?
             </DialogTitle>
           </DialogHeader>
-          <DialogFooter className="flex flex-row justify-end gap-4 pt-2">
+          <DialogFooter className="flex flex-row justify-end gap-4 pt-2 bg-white border-none">
             <Button
               onClick={() => setDeleteOpen(false)}
               disabled={deleting}
@@ -119,7 +119,7 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
 
       {/* Edit modal */}
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
-        <DialogContent>
+        <DialogContent className="lg:w-[25vw] lg:max-w-none" showCloseButton={false}>
           <DialogHeader>
             <DialogTitle>Edit post</DialogTitle>
           </DialogHeader>
