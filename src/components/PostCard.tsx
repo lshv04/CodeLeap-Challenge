@@ -153,7 +153,7 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
               />
             </div>
           </div>
-          <DialogFooter className="flex flex-row justify-end gap-4 pt-2">
+          <DialogFooter className="flex flex-row justify-end gap-4 pt-2 bg-none border-none">
             <Button
               variant="outline"
               onClick={() => setEditOpen(false)}
