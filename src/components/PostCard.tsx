@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, Pencil, Trash2 } from "lucide-react";
+import Image from "next/image";
+import { Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -68,15 +69,15 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
                   setEditContent(post.content);
                   setEditOpen(true);
                 }}
-                className="text-white hover:text-gray-200 transition-colors"
+                className="hover:opacity-75 transition-opacity"
               >
-                <Pencil size={18} />
+                <Image src="/edit.svg" alt="Edit" width={32} height={30} />
               </button>
               <button
                 onClick={() => setDeleteOpen(true)}
-                className="text-white hover:text-gray-200 transition-colors"
+                className="hover:opacity-75 transition-opacity"
               >
-                <Trash2 size={18} />
+                <Image src="/delete.svg" alt="Delete" width={32} height={30} />
               </button>
             </div>
           )}
