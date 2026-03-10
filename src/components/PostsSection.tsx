@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Loader2 } from "lucide-react";
 import PostCard from "@/components/PostCard";
-import { LocaleRouteNormalizer } from "next/dist/server/normalizers/locale-route-normalizer";
 
 type Post = {
   id: number;
@@ -36,6 +36,7 @@ type Props = {
 
 export default function PostsSection({ userId, userName }: Props) {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -45,6 +46,7 @@ export default function PostsSection({ userId, userName }: Props) {
   }, []);
 
   async function fetchPosts() {
+    setLoading(true);
     const [localRes, externalRes] = await Promise.all([
       fetch("/api/posts"),
       fetch("https://dev.codeleap.co.uk/careers/"),
@@ -71,6 +73,7 @@ export default function PostsSection({ userId, userName }: Props) {
     );
 
     setPosts(combined);
+    setLoading(false);
   }
 
   async function handleSubmit() {
@@ -134,15 +137,21 @@ export default function PostsSection({ userId, userName }: Props) {
       </div>
 
       <div className="flex flex-col gap-4">
-        {posts.map((post) => (
-          <PostCard
-            key={post.id}
-            post={post}
-            currentUserId={userId}
-            onDelete={handleDelete}
-            onEdit={handleEdit}
-          />
-        ))}
+        {loading ? (
+          <div className="flex justify-center py-12">
+            <Loader2 size={40} className="animate-spin text-[#7695EC]" />
+          </div>
+        ) : (
+          posts.map((post) => (
+            <PostCard
+              key={post.id}
+              post={post}
+              currentUserId={userId}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+            />
+          ))
+        )}
       </div>
     </div>
   );
