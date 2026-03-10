@@ -1,9 +1,17 @@
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { redirect } from "next/navigation";
 import {
   LoginLink,
   RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 
-export default function Home() {
+export default async function Home() {
+  const { isAuthenticated } = getKindeServerSession();
+
+  if (await isAuthenticated()) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="flex h-[calc(100vh-4rem)] items-center justify-center">
       <div className="flex flex-col items-center gap-6 rounded-md border border-gray-200 bg-white p-5 shadow-sm">
