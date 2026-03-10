@@ -1,4 +1,7 @@
-import Link from "next/link";
+import {
+  LoginLink,
+  RegisterLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 
 export default function Home() {
   return (
@@ -9,18 +12,12 @@ export default function Home() {
           <p className="text-gray-500">Login or register</p>
         </div>
         <div className="flex flex-row gap-4">
-          <Link
-            href="/login"
-            className="w-36 rounded-lg bg-[#7695EC] px-6 py-3 text-center text-white font-semibold hover:bg-[#5a7de8] transition-colors"
-          >
+          <LoginLink className="w-36 rounded-lg bg-[#7695EC] px-6 py-3 text-center text-white font-semibold hover:bg-[#5a7de8] transition-colors">
             Login
-          </Link>
-          <Link
-            href="/register"
-            className="w-36 rounded-lg border border-[#7695EC] px-6 py-3 text-center text-[#7695EC] font-semibold hover:bg-[#7695EC] hover:text-white transition-colors"
-          >
+          </LoginLink>
+          <RegisterLink className="w-36 rounded-lg border border-[#7695EC] px-6 py-3 text-center text-[#7695EC] font-semibold hover:bg-[#7695EC] hover:text-white transition-colors">
             Register
-          </Link>
+          </RegisterLink>
         </div>
       </div>
     </div>
