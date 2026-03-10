@@ -6,12 +6,12 @@ import {
 export default function Home() {
   return (
     <div className="flex h-[calc(100vh-4rem)] items-center justify-center">
-      <div className="flex flex-col items-center gap-6 rounded-md border border-gray-200 bg-white p-10 shadow-sm">
-        <div className="flex flex-col items-center gap-1 text-center">
-          <h1 className="font-[family-name:var(--font-roboto)] font-bold text-[22px] leading-none tracking-normal text-gray-900">
+      <div className="flex flex-col items-center gap-6 rounded-md border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="flex flex-col items-start gap-10 text-left">
+          <h1 className="font-sans font-bold text-[22px] leading-none tracking-normal text-black ">
             Welcome to CodeLeap network!
           </h1>
-          <p className="text-gray-500">Login or register</p>
+          <p className="font-sans font-normal text-[16px] leading-none tracking-normal text-black">Login or register</p>
         </div>
         <div className="flex flex-row gap-4">
           <LoginLink className="w-36 rounded-lg bg-[#7695EC] px-6 py-3 text-center text-white font-semibold hover:bg-[#5a7de8] transition-colors">
