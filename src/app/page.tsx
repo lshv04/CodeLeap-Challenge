@@ -8,7 +8,9 @@ export default function Home() {
     <div className="flex h-[calc(100vh-4rem)] items-center justify-center">
       <div className="flex flex-col items-center gap-6 rounded-md border border-gray-200 bg-white p-10 shadow-sm">
         <div className="flex flex-col items-center gap-1 text-center">
-          <h1 className="text-2xl font-bold text-gray-900">Welcome to CodeLeap network!</h1>
+          <h1 className="font-[family-name:var(--font-roboto)] font-bold text-[22px] leading-none tracking-normal text-gray-900">
+            Welcome to CodeLeap network!
+          </h1>
           <p className="text-gray-500">Login or register</p>
         </div>
         <div className="flex flex-row gap-4">
