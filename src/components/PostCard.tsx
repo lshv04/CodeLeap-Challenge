@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Pencil, Trash2 } from "lucide-react";
+import { Loader2, Pencil, Trash2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -26,13 +26,14 @@ type Post = {
 type Props = {
   post: Post;
   currentUserId: string;
-  onDelete: (id: number) => void;
+  onDelete: (id: number) => Promise<void>;
   onEdit: (id: number, title: string, content: string) => void;
 };
 
 export default function PostCard({ post, currentUserId, onDelete, onEdit }: Props) {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [editTitle, setEditTitle] = useState(post.title);
   const [editContent, setEditContent] = useState(post.content);
 
@@ -43,8 +44,10 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
     setEditOpen(false);
   }
 
-  function handleConfirmDelete() {
-    onDelete(post.id);
+  async function handleConfirmDelete() {
+    setDeleting(true);
+    await onDelete(post.id);
+    setDeleting(false);
     setDeleteOpen(false);
   }
 
@@ -94,15 +97,21 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
           <DialogFooter className="flex flex-row justify-end gap-4 pt-2">
             <Button
               onClick={() => setDeleteOpen(false)}
+              disabled={deleting}
               className="w-36 rounded-lg border border-black bg-white text-black font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-gray-100 px-3 py-2 h-auto"
             >
               Cancel
             </Button>
             <Button
               onClick={handleConfirmDelete}
+              disabled={deleting}
               className="w-36 rounded-lg bg-[#FF5151] text-white font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-[#e03e3e] px-3 py-2 h-auto"
             >
-              Delete
+              {deleting ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                "Delete"
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>
