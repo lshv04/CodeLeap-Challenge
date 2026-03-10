@@ -119,9 +119,9 @@ export default function PostsSection({ userId, userName }: Props) {
           <Button
             onClick={handleSubmit}
             disabled={!title.trim() || !content.trim() || submitting}
-            className="bg-[#7695EC] hover:bg-[#5a7de8]"
+            className="w-36 rounded-lg bg-[#7695EC] text-white font-bold text-[16px] leading-none tracking-normal hover:bg-[#5a7de8] px-3 py-2 h-auto"
           >
-            Post
+            Create
           </Button>
         </div>
       </div>
