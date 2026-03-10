@@ -15,6 +15,19 @@ type Post = {
   createdAt: string;
 };
 
+type ExternalPost = {
+  id?: number;
+  username: string;
+  created_datetime: string | null;
+  title: string;
+  content: string;
+  author_ip: string;
+};
+
+type ExternalApiResponse = {
+  results?: ExternalPost[];
+} | ExternalPost[];
+
 type Props = {
   userId: string;
   userName: string;
@@ -31,9 +44,32 @@ export default function PostsSection({ userId, userName }: Props) {
   }, []);
 
   async function fetchPosts() {
-    const res = await fetch("/api/posts");
-    const data = await res.json();
-    setPosts(data);
+    const [localRes, externalRes] = await Promise.all([
+      fetch("/api/posts"),
+      fetch("https://dev.codeleap.co.uk/careers/"),
+    ]);
+
+    const localData: Post[] = await localRes.json();
+    const externalData: ExternalApiResponse = await externalRes.json();
+
+    const rawExternal: ExternalPost[] = Array.isArray(externalData)
+      ? externalData
+      : (externalData.results ?? []);
+
+    const mappedExternal: Post[] = rawExternal.map((item, index) => ({
+      id: item.id ? -item.id : -(index + 1),
+      title: item.title,
+      content: item.content,
+      authorId: "__external__",
+      authorName: item.username,
+      createdAt: item.created_datetime ?? new Date(0).toISOString(),
+    }));
+
+    const combined = [...localData, ...mappedExternal].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+
+    setPosts(combined);
   }
 
   async function handleSubmit() {
