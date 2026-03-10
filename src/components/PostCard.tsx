@@ -48,8 +48,6 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
     setDeleteOpen(false);
   }
 
-  const btnBase = "w-36 rounded-lg px-3 py-2 text-center font-sans font-bold text-[16px] leading-none tracking-normal transition-colors";
-
   return (
     <>
       <div className="bg-white rounded-md border border-gray-200 shadow-sm p-6">
@@ -94,18 +92,18 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
             </DialogTitle>
           </DialogHeader>
           <DialogFooter className="flex flex-row justify-end gap-4 pt-2">
-            <button
+            <Button
               onClick={() => setDeleteOpen(false)}
-              className={`${btnBase} border border-black bg-white text-black hover:bg-gray-100`}
+              className="w-36 rounded-lg border border-black bg-white text-black font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-gray-100 px-3 py-2 h-auto"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleConfirmDelete}
-              className={`${btnBase} bg-[#FF5151] text-white hover:bg-[#e03e3e]`}
+              className="w-36 rounded-lg bg-[#FF5151] text-white font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-[#e03e3e] px-3 py-2 h-auto"
             >
               Delete
-            </button>
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
