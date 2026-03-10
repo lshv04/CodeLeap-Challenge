@@ -93,7 +93,7 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
       <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <DialogContent className="lg:w-[50%] lg:max-w-none md:p-10 border-[#999999]" showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="font-sans font-bold text-[22px] leading-none tracking-normal text-black">
+            <DialogTitle className="font-bold text-[22px] leading-none tracking-normal text-black">
               Are you sure you want to delete this item?
             </DialogTitle>
           </DialogHeader>
@@ -101,14 +101,14 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
             <Button
               onClick={() => setDeleteOpen(false)}
               disabled={deleting}
-              className="w-36 rounded-lg border border-black bg-white text-black font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-gray-100 px-3 py-2 h-auto"
+              className="w-36 rounded-lg border border-black bg-white text-black font-bold text-[16px] leading-none tracking-normal hover:bg-gray-100 px-3 py-2 h-auto"
             >
               Cancel
             </Button>
             <Button
               onClick={handleConfirmDelete}
               disabled={deleting}
-              className="w-36 rounded-lg bg-[#FF5151] text-white font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-[#e03e3e] px-3 py-2 h-auto"
+              className="w-36 rounded-lg bg-[#FF5151] text-white font-bold text-[16px] leading-none tracking-normal hover:bg-[#e03e3e] px-3 py-2 h-auto"
             >
               {deleting ? (
                 <Loader2 size={16} className="animate-spin" />
@@ -124,13 +124,13 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
         <DialogContent className="lg:w-[50%] lg:max-w-none md:p-10" showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle className="font-sans font-bold text-[22px] leading-none tracking-normal text-black">
+            <DialogTitle className="font-bold text-[22px] leading-none tracking-normal text-black">
               What&apos;s on your mind?
             </DialogTitle>
           </DialogHeader>
           <div className="flex flex-col gap-4 py-2">
             <div className="flex flex-col gap-1">
-              <label className="font-sans font-normal text-[16px] leading-none tracking-normal text-black">
+              <label className="font-normal text-[16px] leading-none tracking-normal text-black">
                 Title
               </label>
               <Input
@@ -140,7 +140,7 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="font-sans font-normal text-[16px] leading-none tracking-normal text-black">
+              <label className="font-normal text-[16px] leading-none tracking-normal text-black">
                 Content
               </label>
               <Textarea
@@ -156,14 +156,14 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
               variant="outline"
               onClick={() => setEditOpen(false)}
               disabled={saving}
-              className="w-36 rounded-lg border border-black bg-white text-black font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-gray-100 px-3 py-2 h-auto"
+              className="w-36 rounded-lg border border-black bg-white text-black font-bold text-[16px] leading-none tracking-normal hover:bg-gray-100 px-3 py-2 h-auto"
             >
               Cancel
             </Button>
             <Button
               onClick={handleSave}
               disabled={!editTitle.trim() || !editContent.trim() || saving}
-              className="w-36 rounded-lg bg-[#47B960] text-white font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-[#3aa351] px-3 py-2 h-auto"
+              className="w-36 rounded-lg bg-[#47B960] text-white font-bold text-[16px] leading-none tracking-normal hover:bg-[#3aa351] px-3 py-2 h-auto"
             >
               {saving ? (
                 <Loader2 size={16} className="animate-spin" />
