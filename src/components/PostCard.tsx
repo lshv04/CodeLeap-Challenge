@@ -27,20 +27,23 @@ type Props = {
   post: Post;
   currentUserId: string;
   onDelete: (id: number) => Promise<void>;
-  onEdit: (id: number, title: string, content: string) => void;
+  onEdit: (id: number, title: string, content: string) => Promise<void>;
 };
 
 export default function PostCard({ post, currentUserId, onDelete, onEdit }: Props) {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [editTitle, setEditTitle] = useState(post.title);
   const [editContent, setEditContent] = useState(post.content);
 
   const isOwner = post.authorId === currentUserId;
 
-  function handleSave() {
-    onEdit(post.id, editTitle, editContent);
+  async function handleSave() {
+    setSaving(true);
+    await onEdit(post.id, editTitle, editContent);
+    setSaving(false);
     setEditOpen(false);
   }
 
@@ -119,33 +122,54 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
 
       {/* Edit modal */}
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
-        <DialogContent className="lg:w-[25vw] lg:max-w-none" showCloseButton={false}>
+        <DialogContent className="lg:w-[50%] lg:max-w-none md:p-10" showCloseButton={false}>
           <DialogHeader>
-            <DialogTitle>Edit post</DialogTitle>
+            <DialogTitle className="font-sans font-bold text-[22px] leading-none tracking-normal text-black">
+              What&apos;s on your mind?
+            </DialogTitle>
           </DialogHeader>
           <div className="flex flex-col gap-4 py-2">
-            <Input
-              value={editTitle}
-              onChange={(e) => setEditTitle(e.target.value)}
-              placeholder="Title"
-            />
-            <Textarea
-              value={editContent}
-              onChange={(e) => setEditContent(e.target.value)}
-              placeholder="Content"
-              rows={4}
-            />
+            <div className="flex flex-col gap-1">
+              <label className="font-sans font-normal text-[16px] leading-none tracking-normal text-black">
+                Title
+              </label>
+              <Input
+                value={editTitle}
+                onChange={(e) => setEditTitle(e.target.value)}
+                placeholder="Hello World"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="font-sans font-normal text-[16px] leading-none tracking-normal text-black">
+                Content
+              </label>
+              <Textarea
+                value={editContent}
+                onChange={(e) => setEditContent(e.target.value)}
+                placeholder="Content Here"
+                rows={4}
+              />
+            </div>
           </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setEditOpen(false)}>
+          <DialogFooter className="flex flex-row justify-end gap-4 pt-2">
+            <Button
+              variant="outline"
+              onClick={() => setEditOpen(false)}
+              disabled={saving}
+              className="w-36 rounded-lg border border-black bg-white text-black font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-gray-100 px-3 py-2 h-auto"
+            >
               Cancel
             </Button>
             <Button
               onClick={handleSave}
-              disabled={!editTitle.trim() || !editContent.trim()}
-              className="bg-[#7695EC] hover:bg-[#5a7de8]"
+              disabled={!editTitle.trim() || !editContent.trim() || saving}
+              className="w-36 rounded-lg bg-[#47B960] text-white font-sans font-bold text-[16px] leading-none tracking-normal hover:bg-[#3aa351] px-3 py-2 h-auto"
             >
-              Save
+              {saving ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                "Save"
+              )}
             </Button>
           </DialogFooter>
         </DialogContent>
