@@ -7,10 +7,10 @@ export default async function Navbar() {
   const user = authenticated ? await getUser() : null;
 
   return (
-    <nav className="w-full bg-[#7695EC] h-16 flex items-center justify-between px-8">
+    <nav className="w-full bg-[#7695EC] min-h-16 flex items-center justify-between px-8 py-3">
       <span className="text-white text-xl font-bold">CodeLeap Network</span>
       {authenticated && user && (
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col items-center gap-1 sm:flex-row sm:items-center sm:gap-4">
           <span className="text-white text-sm font-medium">
             {user.given_name ?? user.email}
           </span>
