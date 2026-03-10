@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PostCard from "@/components/PostCard";
+import { LocaleRouteNormalizer } from "next/dist/server/normalizers/locale-route-normalizer";
 
 type Post = {
   id: number;

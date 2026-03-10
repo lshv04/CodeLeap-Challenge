@@ -56,40 +56,41 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
 
   return (
     <>
-      <div className="bg-white rounded-md border border-gray-200 shadow-sm p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex flex-col gap-1 flex-1">
-            <div className="flex items-center gap-2">
-              <span className="font-semibold text-gray-900">{post.authorName}</span>
-              <span className="text-sm text-gray-400">{timeAgo(post.createdAt)}</span>
-            </div>
-            <h3 className="font-semibold text-gray-800 mt-1">{post.title}</h3>
-            <p className="text-gray-600 text-sm mt-1">{post.content}</p>
-          </div>
+      <div className="bg-white rounded-md border border-gray-200 shadow-sm overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between bg-[#7695EC] px-6 py-4">
+          <h3 className="font-bold text-[22px] leading-none tracking-normal text-white flex-1 mr-4">{post.title}</h3>
           {isOwner && (
-            <div className="flex gap-2 shrink-0">
+            <div className="flex gap-3 shrink-0">
               <button
                 onClick={() => {
                   setEditTitle(post.title);
                   setEditContent(post.content);
                   setEditOpen(true);
                 }}
-                className="text-gray-400 hover:text-[#7695EC] transition-colors"
+                className="text-white hover:text-gray-200 transition-colors"
               >
-                <Pencil size={16} />
+                <Pencil size={18} />
               </button>
               <button
                 onClick={() => setDeleteOpen(true)}
-                className="text-gray-400 hover:text-red-500 transition-colors"
+                className="text-white hover:text-gray-200 transition-colors"
               >
-                <Trash2 size={16} />
+                <Trash2 size={18} />
               </button>
             </div>
           )}
         </div>
+        {/* Body */}
+        <div className="flex flex-col gap-3 px-6 py-4">
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-[18px] leading-none text-[#777777]">@{post.authorName}</span>
+            <span className="font-normal text-[18px] leading-none text-[#777777]">{timeAgo(post.createdAt)}</span>
+          </div>
+          <p className="text-gray-600 text-sm">{post.content}</p>
+        </div>
       </div>
 
-    
       <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <DialogContent className="lg:w-[50%] lg:max-w-none md:p-10 border-[#999999]" showCloseButton={false}>
           <DialogHeader>
