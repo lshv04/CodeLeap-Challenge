@@ -31,7 +31,8 @@ type Props = {
 };
 
 export default function PostCard({ post, currentUserId, onDelete, onEdit }: Props) {
-  const [open, setOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const [editTitle, setEditTitle] = useState(post.title);
   const [editContent, setEditContent] = useState(post.content);
 
@@ -39,8 +40,15 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
 
   function handleSave() {
     onEdit(post.id, editTitle, editContent);
-    setOpen(false);
+    setEditOpen(false);
   }
+
+  function handleConfirmDelete() {
+    onDelete(post.id);
+    setDeleteOpen(false);
+  }
+
+  const btnBase = "w-36 rounded-lg px-3 py-2 text-center font-sans font-bold text-[16px] leading-none tracking-normal transition-colors";
 
   return (
     <>
@@ -60,14 +68,14 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
                 onClick={() => {
                   setEditTitle(post.title);
                   setEditContent(post.content);
-                  setOpen(true);
+                  setEditOpen(true);
                 }}
                 className="text-gray-400 hover:text-[#7695EC] transition-colors"
               >
                 <Pencil size={16} />
               </button>
               <button
-                onClick={() => onDelete(post.id)}
+                onClick={() => setDeleteOpen(true)}
                 className="text-gray-400 hover:text-red-500 transition-colors"
               >
                 <Trash2 size={16} />
@@ -77,7 +85,33 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
         </div>
       </div>
 
-      <Dialog open={open} onOpenChange={setOpen}>
+      {/* Delete confirmation modal */}
+      <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="font-sans font-bold text-[22px] leading-none tracking-normal text-black">
+              Are you sure you want to delete this item?
+            </DialogTitle>
+          </DialogHeader>
+          <DialogFooter className="flex flex-row justify-end gap-4 pt-2">
+            <button
+              onClick={() => setDeleteOpen(false)}
+              className={`${btnBase} border border-black bg-white text-black hover:bg-gray-100`}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleConfirmDelete}
+              className={`${btnBase} bg-[#FF5151] text-white hover:bg-[#e03e3e]`}
+            >
+              Delete
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit modal */}
+      <Dialog open={editOpen} onOpenChange={setEditOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Edit post</DialogTitle>
@@ -96,7 +130,7 @@ export default function PostCard({ post, currentUserId, onDelete, onEdit }: Prop
             />
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setOpen(false)}>
+            <Button variant="outline" onClick={() => setEditOpen(false)}>
               Cancel
             </Button>
             <Button
