@@ -104,22 +104,28 @@ export default function PostsSection({ userId, userName }: Props) {
     <div className="max-w-2xl mx-auto py-8 px-4 flex flex-col gap-6">
       <div className="bg-white rounded-md border border-gray-200 shadow-sm p-6 flex flex-col gap-4">
         <h2 className="font-semibold text-gray-900">What&apos;s on your mind, {userName}?</h2>
-        <Input
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <Textarea
-          placeholder="Content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          rows={3}
-        />
+        <div className="flex flex-col gap-1">
+          <label className="font-normal text-[16px] leading-none tracking-normal text-black">Title</label>
+          <Input
+            placeholder="Hello World"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="font-normal text-[16px] leading-none tracking-normal text-black">Content</label>
+          <Textarea
+            placeholder="Content Here"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            rows={3}
+          />
+        </div>
         <div className="flex justify-end">
           <Button
             onClick={handleSubmit}
             disabled={!title.trim() || !content.trim() || submitting}
-            className="w-36 rounded-lg bg-[#7695EC] text-white font-bold text-[16px] leading-none tracking-normal hover:bg-[#5a7de8] px-3 py-2 h-auto"
+            className="w-36 rounded-lg bg-[#7695EC] text-white font-bold text-[16px] leading-none tracking-normal hover:bg-[#5a7de8] px-3 py-2 h-auto disabled:bg-[#DDDDDD] disabled:opacity-100"
           >
             Create
           </Button>
