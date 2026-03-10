@@ -102,7 +102,7 @@ export default function PostsSection({ userId, userName }: Props) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-8 px-4 flex flex-col gap-6">
+    <div className="max-w-2xl mx-auto py-8 px-4 flex flex-col gap-10">
       <div className="bg-white rounded-md border border-gray-200 shadow-sm p-6 flex flex-col gap-4">
         <h2 className="font-semibold text-gray-900">What&apos;s on your mind, {userName}?</h2>
         <div className="flex flex-col gap-1">
