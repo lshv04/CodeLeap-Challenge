@@ -61,5 +61,9 @@ Integrar posts de uma API externa junto com os posts locais do banco de dados ex
 
 ## 🎥 Demo
 
-<video src="recording.mp4" controls width="100%"></video>
+
+
+https://github.com/user-attachments/assets/20ce251f-eea8-4ee7-ab9c-d42b494688f4
+
+
 
