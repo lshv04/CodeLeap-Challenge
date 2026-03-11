@@ -65,3 +65,5 @@ describe("PostCard", () => {
     expect(screen.getByText("What's on your mind?")).toBeInTheDocument();
   });
 });
+
+
